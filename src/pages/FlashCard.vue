@@ -71,7 +71,7 @@ export default {
   methods: {
     checkWord(translation, inputWord, idWord) {
       const flashcard = this.flashcards.find(word => word.id === idWord);
-      flashcard.hit = (translation == inputWord)
+      flashcard.hit = (translation.toLowerCase() == inputWord.toLowerCase())
       flashcard.answered = true
       this.inputWord = ''
     },
