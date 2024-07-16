@@ -97,15 +97,19 @@ export default {
 
       dashboardService.createHistoric({'historics':historic}).
       then((response)=>{
-          createToast(
-          `${hits} Hits`,
-            { type: 'success', showIcon: true, timeout: 5000 }
-          )
-          createToast(
-          `${errors} Errors`,
-            { type: 'warning', showIcon: true, timeout: 5000 }
-          )
-          
+          if(hits > 0){
+            createToast(
+            `${hits} Hits`,
+              { type: 'success', showIcon: true, timeout: 5000 }
+            )
+          }
+          if(errors > 0){
+            createToast(
+            `${errors} Errors`,
+              { type: 'warning', showIcon: true, timeout: 5000 }
+            )
+          }
+      
       }).catch((error)=>{
         createToast(
           `Error when saving`,

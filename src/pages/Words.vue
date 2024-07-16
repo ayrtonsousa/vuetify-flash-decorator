@@ -22,8 +22,7 @@
                                 <v-text-field v-model="editedItem.translation" label="Translation" variant="outlined" :rules="ruleTranslation"></v-text-field>
                                 <v-textarea v-model="editedItem.annotation" label="Annotation" variant="outlined"></v-textarea>
                                 <v-autocomplete label="Tags" v-model="editedItem.tags" variant="outlined"
-                                    :items="this.tags" item-title="name" item-value="id" chips
-                                    multiple></v-autocomplete>
+                                    :items="this.tags" item-title="name" item-value="id" chips multiple></v-autocomplete>
                                     <v-btn class="my-2" @click="dialogTag = true">
                                         <v-icon>mdi-plus</v-icon>Tags
                                     </v-btn>
@@ -41,7 +40,6 @@
                         </v-row>
                     </v-container>
                 </v-card-text>
-
 
             </v-card>
         </v-dialog>
@@ -81,7 +79,7 @@
                     <v-btn color="blue-darken-1" variant="text" @click="saveTag">
                         Save
                     </v-btn>
-                    <v-btn text="Close" variant="text" @click="dialogTag = false"></v-btn>
+                    <v-btn text="Close" variant="text" @click="dialogTag = false, this.inputTag = ''"></v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -97,7 +95,6 @@
             </v-card>
         </v-dialog>
 
-
         <v-spacer></v-spacer>
 
         <v-text-field v-model="search" density="compact" label="Search" prepend-inner-icon="mdi-magnify"
@@ -111,7 +108,7 @@
         <template v-slot:item.tags="{ value }">
             <v-chip-group>
                 <v-chip v-for="tag in value" :key="tag">
-                    <v-icon icon="mdi-label" start></v-icon> {{ getTagName(tag) }}
+                    <v-icon icon="mdi-label" start></v-icon> {{ tag.name }}
                 </v-chip>
             </v-chip-group>
         </template>
@@ -167,6 +164,7 @@ export default {
             { title: 'Translation', key: 'translation' },
             { title: 'Annotations', key: 'annotation' },
             { title: 'Tags', key: 'tags', sortable: false },
+            { title: 'teste', key: 'teste', sortable: false },
             { title: 'Actions', key: 'actions', sortable: false },
         ],
         words: [],
@@ -215,15 +213,12 @@ export default {
             wordsService.getAll()
             .then((response) => {
                 this.words = response.data
+                this.words.reverse()
             })
             tagsService.getAll()
             .then((response) => {
                 this.tags = response.data
             })
-        },
-        getTagName(tagId) {
-            const tag = this.tags.find(item => item.id === tagId);
-            return tag ? tag.name : '';
         },
         editItem(item) {
           wordsService.get(item.id)
@@ -301,7 +296,7 @@ export default {
                     .then((response) => {
                         const wordCreated = response.data
                         this.close()
-                        this.words.push(wordCreated)
+                        this.words.splice(0, 0, wordCreated);
                     })
                 }
 

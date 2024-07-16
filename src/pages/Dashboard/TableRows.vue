@@ -1,8 +1,11 @@
 <template>
-        <v-card elevation="3" min-width="350">
-        <v-card-title class="text-center">
+        <v-card elevation="3" min-width="350" >
+        <v-card-title class="text-center" >
             Top 10 errors
         </v-card-title>
+        <v-card-subtitle class="text-center" >
+          All the time until yesterday
+        </v-card-subtitle>
         <v-card-item>
             <v-table density="compact" fixed-header>
             <thead>

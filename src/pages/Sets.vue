@@ -28,7 +28,23 @@
                                     item-value="id"
                                     multiple chips variant="outlined"
                                     :rules="ruleWords"
-                                ></v-autocomplete>
+                                    :custom-filter="customFilter"
+                                >
+                                <template v-slot:chip="{ props, item }">
+                                    <v-chip
+                                    v-bind="props"
+                                    :text="item.raw.name"
+                                    ></v-chip>
+                                </template>
+
+                                <template v-slot:item="{ props, item }">
+                                    <v-list-item
+                                    v-bind="props"
+                                    :subtitle="item.raw.tags.map(tag => tag.name).join(', ')"
+                                    :title="item.raw.name"
+                                    ></v-list-item>
+                                </template>
+                            </v-autocomplete>
                                 <v-card-actions>
                                     <v-spacer></v-spacer>
                                     <v-btn color="blue-darken-1" variant="text" @click="close">
@@ -227,6 +243,14 @@ export default {
                 }
 
             }
+        },
+
+        customFilter (itemTitle, queryText, item) {
+            const textOne = item.raw.name.toLowerCase()
+            const textTwo = item.raw.tags.map(tag => tag.name).join(', ').toLowerCase()
+            const searchText = queryText.toLowerCase()
+
+            return textOne.indexOf(searchText) > -1 || textTwo.indexOf(searchText) > -1
         },
     },
 }

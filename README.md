@@ -34,5 +34,5 @@ npm run dev
 #### Faz build para produção
 npm run build
 
-#### Checa erros de sintaxe
+#### Checar erros de sintaxe
 npm run lint

@@ -9,25 +9,24 @@
                 </v-card-title>
 
                 <v-card-item>
-                
-                                <div class="text-h6">
-                                    User
-                                </div>
-                                <div class="mb-4">
-                                    {{ editedItem.name }}
-                                </div>
-                                <v-autocomplete
-                                    label="Roles"
-                                    v-model="editedItem.roles" variant="outlined"
-                                    :items="this.roles" item-title="name" item-value="id"
-                                    multiple chips
-                                ></v-autocomplete>
-                                <v-checkbox
-                                label="Admin ?"
-                                v-model="editedItem.is_admin"
-                                hint="Admin users does not need to have roles checked"
-                                persistent-hint
-                                ></v-checkbox>
+                    <div class="text-h6">
+                        User
+                    </div>
+                    <div class="mb-4">
+                        {{ editedItem.name }}
+                    </div>
+                    <v-autocomplete
+                        label="Roles"
+                        v-model="editedItem.roles" variant="outlined"
+                        :items="this.roles" item-title="name" item-value="id"
+                        multiple chips
+                    ></v-autocomplete>
+                    <v-checkbox
+                    label="Admin ?"
+                    v-model="editedItem.is_admin"
+                    hint="Admin users does not need to have roles checked"
+                    persistent-hint
+                    ></v-checkbox>
                            
                 </v-card-item>
 
