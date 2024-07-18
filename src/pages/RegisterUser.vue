@@ -28,6 +28,7 @@
           density="compact" placeholder="Enter confirm your password" prepend-inner-icon="mdi-lock-outline"
           variant="outlined" @click:append-inner="visible = !visible" v-model="confirmationPassword"
           :rules="confirmationPasswordRules"></v-text-field>
+          
         <v-checkbox v-model="agree" :rules="[v => !!v || 'You must agree to continue!']" required>
           <template v-slot:label>
             <div>

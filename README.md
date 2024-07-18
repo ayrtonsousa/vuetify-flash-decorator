@@ -3,7 +3,7 @@
 Projeto para cadastro de palavras e aprendizado de palavras usando flash cards usando Vuetify, Pinia
 
 ## Features
-- Login e cadastro de usuários
+- Login, cadastro de usuários e alteração e senha
 - Dashboard para acompanhamento de resultados
 - Cadastro de palavras e tags e vincular elas
 - Cadastro de flash cards com agrupamento de palavras para aprendizado

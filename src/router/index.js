@@ -39,6 +39,11 @@ const routes = [
         path: '/users-list',
         name: 'Users',
         component: () => import('@/pages/UsersList.vue'),
+      },
+      {
+        path: '/change-password',
+        name: 'ChangePassword',
+        component: () => import('@/pages/ChangePassword.vue'),
       }  
     ],
   },
@@ -105,7 +110,6 @@ router.onError((error, to) => {
     window.location = to.fullPath
   }
 })
-
 
 
 export default router

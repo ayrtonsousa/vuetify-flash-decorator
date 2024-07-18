@@ -1,5 +1,5 @@
 <template>
-  <v-carousel v-if="flashcards.length" height="350" progress="indigo" hide-delimiters :continuous="false" @update:modelValue="this.inputWord = ''">
+  <v-carousel v-model="stepWord" v-if="flashcards.length" height="350" progress="indigo" hide-delimiters :continuous="false" @update:modelValue="this.inputWord = ''">
     <v-carousel-item v-for="(flashcard, index) in flashcards" :key="index">
 
       <v-card color="indigo" class="mx-auto my-8" max-width="700" height="300">
@@ -8,7 +8,9 @@
             {{ flashcard.name }}
           </p>
           <v-text-field class="my-6" v-model="inputWord" label="Type in portuguese" variant="outlined" hide-details
-            single-line>
+          v-on:keyup.enter=" this.inputWord ? checkWord(flashcard.translation, inputWord, flashcard.id) : false "
+          :id="`id-${index}`"
+          >
           </v-text-field>
         </v-card-text>
         <v-card-actions class="mr-2 ml-2">
@@ -63,9 +65,20 @@ export default {
   data() {
     return {
       inputWord: '',
-      stepWord: 1,
       flashcards: [],
-      idSet: this.$route.params.id
+      idSet: this.$route.params.id,
+      stepWord: 0
+    }
+  },
+  watch: {
+    stepWord: function() {
+      setTimeout(() => {
+        const field = document.getElementById(`id-${this.stepWord}`);
+        if(field){
+          field.focus();
+        }
+      }, 200);
+      
     }
   },
   methods: {
@@ -74,6 +87,9 @@ export default {
       flashcard.hit = (translation.toLowerCase() == inputWord.toLowerCase())
       flashcard.answered = true
       this.inputWord = ''
+      setTimeout(() => {
+        this.stepWord += this.flashcards.length == this.stepWord ? 0 : 1 
+      }, 700);
     },
     finishQuiz(){
       let hits = 0

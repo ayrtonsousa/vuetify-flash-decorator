@@ -28,6 +28,10 @@ const getAllRoles = () => {
 const updateRoles = async (id, data) => {
   return api.put(`/api/users/update_roles/${id}`, data);
 };
+
+const changePassword = async (data) => {
+  return api.post(`/api/users/me/update_password`, data);
+};
   
   
 export const userService = {
@@ -37,5 +41,6 @@ export const userService = {
     update,
     remove,
     getAllRoles,
-    updateRoles
+    updateRoles,
+    changePassword,
 };
