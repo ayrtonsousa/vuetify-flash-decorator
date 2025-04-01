@@ -49,6 +49,10 @@ import { createToast } from 'mosha-vue-toastify'
     passwordRules: [
         (v) => !!v || "New password is required",
         (v) => (v && v.length >= 3) || "New password must be more than 2 characters",
+        (v) => (v && v.length <= 10) || "Password must be less than or equal to 10 characters",
+        (v) => 
+        /^[A-Za-z0-9!@#$%^&*()]+$/.test(v) ||
+        "Password contains unsupported characters. Use only letters, numbers, and common special symbols.",
     ],
     confirmationPassword: "",
     confirmationPasswordRules: [],
